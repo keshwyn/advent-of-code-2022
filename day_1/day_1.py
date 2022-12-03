@@ -31,3 +31,6 @@ for an_elf in elves:
         highest = an_elf
 
 print(highest)
+
+sorted_elves = sorted(elves)
+print(sum(sorted_elves[-3:]))
