@@ -11,7 +11,7 @@
 # sort through caloric values of elf, find greatest value
 
 
-with open('./day_1/day1_input', 'r') as f:
+with open('./advent_of_code/day1_input', 'r') as f:
     contents = f.readlines() 
 
 elf = 0
