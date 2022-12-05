@@ -1,6 +1,6 @@
 import re
 
-with open('./advent_of_code/day5_test_data', 'r') as f:
+with open('./advent_of_code/day5_input', 'r') as f:
     contents = f.readlines() 
 
 initializing = True
@@ -39,18 +39,28 @@ for line in contents:
 
 for list in stacks:
     list.pop()
-print(stacks)
+#print(stacks)
 
 
 # OK, now we can start handling the 
 for line in contents:
-    l = line.strip()
+    if line.startswith('move'):
 
-    if l == '':
-        initializing = False
-        next
-    if initializing:
-        next
+        #print(line)
+        l = line.split()
+        move = int(l[1])
+        start = int(l[3]) - 1 
+        dest = int(l[5]) - 1
 
-    
+        i = 0
+        temp_list = []
+        while i < move:
+            temp_list.append(stacks[start].pop())
+            i += 1
+        stacks[dest].extend(temp_list)
+
+        #print(stacks)
+
+for list in stacks:
+    print(list[-1], sep='', end='')
     
