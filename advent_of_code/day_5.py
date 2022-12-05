@@ -2,8 +2,6 @@ with open('./advent_of_code/day5_input', 'r') as f:
 #with open('./advent_of_code/day5_test_data', 'r') as f:
     contents = f.readlines() 
 
-initializing = True
-
 # Find how many stacks we have
 stacks = []
 for line in contents:
