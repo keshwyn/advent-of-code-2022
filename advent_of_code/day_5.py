@@ -1,6 +1,5 @@
-import re
-
 with open('./advent_of_code/day5_input', 'r') as f:
+#with open('./advent_of_code/day5_test_data', 'r') as f:
     contents = f.readlines() 
 
 initializing = True
@@ -41,8 +40,7 @@ for list in stacks:
     list.pop()
 #print(stacks)
 
-
-# OK, now we can start handling the 
+# OK, now we can start handling the crane
 for line in contents:
     if line.startswith('move'):
 
@@ -55,8 +53,11 @@ for line in contents:
         i = 0
         temp_list = []
         while i < move:
-            temp_list.append(stacks[start].pop())
+        #    temp_list.append(stacks[start].pop())
+            temp_list.insert(0,stacks[start].pop())  # I could do this a lot more efficiently if I used slice, but I'd have to rewrite
             i += 1
+        
+        print(temp_list)
         stacks[dest].extend(temp_list)
 
         #print(stacks)
