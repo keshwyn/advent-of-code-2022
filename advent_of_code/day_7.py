@@ -1,13 +1,15 @@
-#with open('./advent_of_code/day7_input', 'r') as f:
-with open('./advent_of_code/day7_test_data', 'r') as f:
+with open('./advent_of_code/day7_input', 'r') as f:
+#with open('./advent_of_code/day7_test_data', 'r') as f:
     contents = f.readlines() 
 
 directories = ['/']
 depth = 0
 x = ' '
 parent = ['/']
+dirlist = []
+filelist = []
 
-debug = True
+debug = False
 
 for line in contents:
     l = line.strip('\n')
@@ -27,18 +29,43 @@ for line in contents:
                 elif command[2] == '..':
                     depth -= 1
                     parent.pop()
-                    # parent == parent of current directory - have to look that up
                 else:
                     depth += 1
                     parent.append(command[2])
+                    dirlist.append(command[2])
                     if debug:
                         print(("{} - {} (dir)").format(x*(((depth)*2)-1), command[2]))
-
     elif l.startswith('dir'):
         # This is a directory inside of the ls
         # We can ignore empty directories (for now, that may come up) so we're going to skip these lines.
-        next
+        dir = l.split()
+        dirlist.append(dir[1])
     else:
         f = l.split()
         if debug:
             print("{} - {} (file, size={}) (parent={})".format(x*(((depth+1)*2)-1), f[1], f[0], parent))
+        p = parent[:] # lists aren't immutable, so I have to do this to make sure the parent doesn't get overwritten.
+        filelist.append([f[1], f[0], p])
+
+smalldirs = 0
+dirlist = sorted(set(dirlist))
+for dir in dirlist:
+    print(dir)       
+    i = 0
+    for file in filelist:
+        if dir in file[2]:
+            i += int(file[1])
+    if debug:
+        print(dir, i)
+
+    if i < 100000:
+        print(dir, i)
+        smalldirs += i
+
+i = 0
+for file in filelist:
+    i += int(file[1])
+if i < 100000:
+    print("/", i)
+
+print(smalldirs)
